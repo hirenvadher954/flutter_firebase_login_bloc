@@ -46,6 +46,38 @@ class AuthenticationRepository {
       throw SignUpFailure();
     }
   }
+
+  Future<void> logInWithGoogle() async {
+    final firebase_auth.AuthCredential credential;
+    try {
+      final googleUser = await _googleSignIn.signIn();
+      // TODO: remove below line to see what happen
+      final googleAuth = await googleUser!.authentication;
+      credential = firebase_auth.GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+      await _firebaseAuth.signInWithCredential(credential);
+    } on Exception {
+      throw LogInWithGoogleFailure();
+    }
+  }
+
+  Future<void> logInWithEmailPassword(
+      {required String email, required String password}) async {
+    await _firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
+    try {} on Exception {
+      throw LogInWithEmailAndPasswordFailure();
+    }
+  }
+
+  Future<void> logOut() async {
+    try {
+      await _googleSignIn.signOut();
+      await _firebaseAuth.signOut();
+    } on Exception {
+      throw LogOutFailure();
+    }
+  }
 }
 
 extension on firebase_auth.User {
