@@ -5,18 +5,18 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class SignUpFailure implements Exception {}
 
-class LogOutFailure implements Exception {}
-
 class LogInWithEmailAndPasswordFailure implements Exception {}
 
 class LogInWithGoogleFailure implements Exception {}
 
+class LogOutFailure implements Exception {}
+
 class AuthenticationRepository {
-  AuthenticationRepository(
+  AuthenticationRepository({
     CacheClient? cache,
     firebase_auth.FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
-  )   : _cache = cache ?? CacheClient(),
+  })  : _cache = cache ?? CacheClient(),
         _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn.standard();
 
@@ -51,7 +51,6 @@ class AuthenticationRepository {
     final firebase_auth.AuthCredential credential;
     try {
       final googleUser = await _googleSignIn.signIn();
-      // TODO: remove below line to see what happen
       final googleAuth = await googleUser!.authentication;
       credential = firebase_auth.GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);

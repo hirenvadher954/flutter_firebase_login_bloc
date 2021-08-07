@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "227157513686",
+    "project_id": "blocsignin",
+    "storage_bucket": "blocsignin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227157513686:android:11da990bd39e85ad25c077",
+        "android_client_info": {
+          "package_name": "com.example.bloc_google_sin_in"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227157513686-vd5ok8onck93n8os4pirk4rab6hvn9v2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzUEkrw9mHWN2CoBoa67vpq0NgU-S4ggU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227157513686-vd5ok8onck93n8os4pirk4rab6hvn9v2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
