@@ -34,7 +34,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         status: Formz.validate([state.email, password, confirmedPassword])));
   }
 
-  void confirmedPassword(String value) {
+  void confirmedPasswordChanged(String value) {
     final confirmedPassword =
         ConfirmedPassword.dirty(password: state.password.value, value: value);
     emit(state.copyWith(
