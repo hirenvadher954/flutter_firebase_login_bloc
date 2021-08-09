@@ -29,18 +29,29 @@ class SignUpCubit extends Cubit<SignUpState> {
       value: state.confirmedPassword.value,
     );
     emit(state.copyWith(
-        password: password,
-        confirmedPassword: confirmedPassword,
-        status: Formz.validate([state.email, password, confirmedPassword])));
+      password: password,
+      confirmedPassword: confirmedPassword,
+      status: Formz.validate([
+        state.email,
+        password,
+        confirmedPassword,
+      ]),
+    ));
   }
 
   void confirmedPasswordChanged(String value) {
-    final confirmedPassword =
-        ConfirmedPassword.dirty(password: state.password.value, value: value);
+    final confirmedPassword = ConfirmedPassword.dirty(
+      password: state.password.value,
+      value: value,
+    );
     emit(state.copyWith(
-        confirmedPassword: confirmedPassword,
-        status:
-            Formz.validate([state.email, state.password, confirmedPassword])));
+      confirmedPassword: confirmedPassword,
+      status: Formz.validate([
+        state.email,
+        state.password,
+        confirmedPassword,
+      ]),
+    ));
   }
 
   Future<void> signUpFormSubmitted() async {

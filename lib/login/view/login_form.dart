@@ -10,24 +10,35 @@ class LogInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Image.asset(
-          'assets/images/bloc_fun.png',
-          height: 120,
-        ),
-        const SizedBox(height: 16.0),
-        _EmailInput(),
-        const SizedBox(height: 8.0),
-        _PasswordInput(),
-        const SizedBox(height: 8.0),
-        _LoginButton(),
-        const SizedBox(height: 8.0),
-        _GoogleLoginButton(),
-        const SizedBox(height: 8.0),
-        _SignUpButton(),
-      ],
+    return BlocListener<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state.status.isSubmissionFailure) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              const SnackBar(content: Text('Authentication Failure')),
+            );
+        }
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            'assets/images/bloc_fun.png',
+            height: 120,
+          ),
+          const SizedBox(height: 16.0),
+          _EmailInput(),
+          const SizedBox(height: 8.0),
+          _PasswordInput(),
+          const SizedBox(height: 8.0),
+          _LoginButton(),
+          const SizedBox(height: 8.0),
+          _GoogleLoginButton(),
+          const SizedBox(height: 8.0),
+          _SignUpButton(),
+        ],
+      ),
     );
   }
 }
@@ -44,7 +55,6 @@ class _EmailInput extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
                 labelText: 'email',
-                helperText: '',
                 errorText: state.email.invalid ? 'Invalid email' : null),
           );
         });
@@ -63,7 +73,6 @@ class _PasswordInput extends StatelessWidget {
           obscureText: true,
           decoration: InputDecoration(
               labelText: "password",
-              helperText: '',
               errorText: state.password.invalid ? 'Invalid password' : null),
         );
       },

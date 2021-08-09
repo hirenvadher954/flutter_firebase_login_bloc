@@ -11,7 +11,7 @@ class ConfirmedPassword
   final String password;
 
   @override
-  ConfirmedPasswordValidationError? validator(String value) {
-    throw UnimplementedError();
+  ConfirmedPasswordValidationError? validator(String? value) {
+    return password == value ? null : ConfirmedPasswordValidationError.invalid;
   }
 }
