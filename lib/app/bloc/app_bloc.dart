@@ -22,14 +22,16 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   final AuthenticationRepository _authenticationRepository;
   late final StreamSubscription<User> _userSubscription;
 
-  void _onUserChanged(User user) => add(AppUserChanged(user));
+  void _onUserChanged(User user) {
+    add(AppUserChanged(user));
+  }
 
   @override
   Stream<AppState> mapEventToState(
     AppEvent event,
   ) async* {
     if (event is AppUserChanged) {
-      _mapUserChangedToState(event, state);
+      yield _mapUserChangedToState(event, state);
     } else if (event is AppLogoutRequested) {
       _authenticationRepository.logOut();
     }
@@ -40,6 +42,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         ? AppState.authenticated(event.user)
         : AppState.unauthenticated();
   }
+
   @override
   Future<void> close() {
     _userSubscription.cancel();
